@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yet_agavestorm"
+version = "0.0.1"
+authors = [
+  { name="Agavestorm Inc", email="somehownottaken@gmail.com" },
+]
+description = "Yet: git based personal task manager"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/agavestorm/yet"
+"Bug Tracker" = "https://github.com/agavestorm/yet/issues"
+
+[project.scripts]
+yet         = "yet_agavestorm:yet.main"
+yet-archive = "yet_agavestorm:archive.main"
+yet-create  = "yet_agavestorm:create.main"
+yet-drop    = "yet_agavestorm:drop.main"
+yet-git     = "yet_agavestorm:git.main"
+yet-lastid  = "yet_agavestorm:lastid.main"
+yet-list    = "yet_agavestorm:list.main"
+yet-open    = "yet_agavestorm:open.main"
+yet-pick    = "yet_agavestorm:pick.main"
+yet-reset   = "yet_agavestorm:reset.main"
+yet-scope   = "yet_agavestorm:scope.main"
+
