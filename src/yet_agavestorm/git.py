@@ -8,7 +8,7 @@ def main():
     argv.pop(0); # remove first element, pointing to script itself
     home = os.path.expanduser("~");
     curpath = os.getcwd();
-    os.chdir(tsklib.tskpath);
+    os.chdir(tsklib.tskpath());
     os.system("git "+' '.join(argv));
     os.chdir(curpath);
     pass

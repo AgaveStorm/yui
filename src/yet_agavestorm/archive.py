@@ -35,7 +35,7 @@ def main():
         if task["status"] != "done":
             continue
         pass
-        targetPath = tsklib.tskpath + "/"+date+"/"+task["status"]
+        targetPath = tsklib.tskpath() + "/"+date+"/"+task["status"]
         os.makedirs(targetPath, exist_ok=True)
         print("moving " + task["filename"] + " to "+date+" .. ", end="")
         os.rename( filename, targetPath + "/" + task["filename"]);

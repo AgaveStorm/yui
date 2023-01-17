@@ -33,7 +33,7 @@ def main():
         if task["status"] == "done":
             continue
         pass
-        targetPath = tsklib.tskpath + "/heap/"+task["status"]
+        targetPath = tsklib.tskpath() + "/heap/"+task["status"]
         os.makedirs(targetPath, exist_ok=True)
         print("moving " + task["filename"] + " back to heap .. ", end="")
         os.rename( filename, targetPath + "/" + task["filename"]);

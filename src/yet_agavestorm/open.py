@@ -26,7 +26,7 @@ def main():
                 break
             pass
     if editor=="":
-        print("Can't detect text editor, use "+tsklib.tskpath+"/config.yaml to specify");
+        print("Can't detect text editor, use "+tsklib.tskpath()+"/config.yaml to specify");
         exit(1);
         pass
 

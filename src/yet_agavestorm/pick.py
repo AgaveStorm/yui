@@ -17,7 +17,7 @@ def main():
     id = argv[0]
     filename = tsklib.getTaskFilenameById(id, "heap")
     task = tsklib.loadYaml(filename)
-    targetPath = tsklib.tskpath + "/cur/" + task["status"]
+    targetPath = tsklib.tskpath() + "/cur/" + task["status"]
     os.makedirs(targetPath, exist_ok=True)
     os.rename( filename, targetPath + "/" + task["filename"]);
     tsklib.gitAddCommitTask("pick "+id);

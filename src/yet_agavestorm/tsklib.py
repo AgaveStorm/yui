@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 import os, glob, yaml
+from appdata import AppDataPaths
 
-tskpath = os.path.expanduser("~")+"/.tsk";
+def tskpath():
+    path = AppDataPaths("yet_agavestorm").app_data_path
+    os.makedirs(path, exist_ok=True)
+    return path
+    pass
 
 def getTaskFilenameById(id, location="*"):
     files = findTaskFiles( location, "*."+id+".md")
@@ -20,11 +25,11 @@ def getTaskFilenameById(id, location="*"):
     pass
 
 def findTaskFiles(location, pattern):
-    return glob.glob( tskpath + "/"+location+"/*/"+pattern)
+    return glob.glob( tskpath() + "/"+location+"/*/"+pattern)
     pass
 
 def getConfigParam(param):
-    return loadYaml( tskpath + "/config.yaml" )[param]
+    return loadYaml( tskpath() + "/config.yaml" )[param]
     pass
 
 def loadYaml(filename):
@@ -41,7 +46,7 @@ def saveYaml(filename, data):
 
 def gitAddCommitTask(message):
     curpath = os.getcwd();
-    os.chdir(tskpath);
+    os.chdir(tskpath());
     os.system("git add ./*.md > /dev/null && git commit -m '"+message+"' > /dev/null");
     os.chdir(curpath);
     pass
@@ -65,7 +70,7 @@ def loadScope():
         "context":""
         }
     try:
-        data = loadYaml( tskpath+"/scope.yaml")
+        data = loadYaml( tskpath()+"/scope.yaml")
         for key in scope:
             try:
                 scope[key] = data[key]
@@ -86,5 +91,5 @@ def getScope():
     pass
 
 def saveScope( scope ):
-    saveYaml( tskpath+"/scope.yaml", scope)
+    saveYaml( tskpath()+"/scope.yaml", scope)
     pass
