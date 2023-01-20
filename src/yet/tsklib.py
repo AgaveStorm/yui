@@ -3,7 +3,7 @@ import os, glob, yaml
 from appdata import AppDataPaths
 
 def tskpath():
-    default="yet_agavestorm"
+    default="yet"
     home = os.getenv("YET_HOME", default)
     path = AppDataPaths(home).app_data_path
     os.makedirs(path, exist_ok=True)

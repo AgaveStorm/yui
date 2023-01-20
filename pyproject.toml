@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "yet_agavestorm"
+name = "yet"
 version = "0.0.1"
 authors = [
   { name="Agavestorm Inc", email="somehownottaken@gmail.com" },
@@ -26,15 +26,15 @@ dependencies = [
 "Bug Tracker" = "https://github.com/agavestorm/yet/issues"
 
 [project.scripts]
-yet         = "yet_agavestorm:yet.main"
-yet-archive = "yet_agavestorm:archive.main"
-yet-create  = "yet_agavestorm:create.main"
-yet-drop    = "yet_agavestorm:drop.main"
-yet-git     = "yet_agavestorm:git.main"
-yet-lastid  = "yet_agavestorm:lastid.main"
-yet-list    = "yet_agavestorm:list.main"
-yet-open    = "yet_agavestorm:open.main"
-yet-pick    = "yet_agavestorm:pick.main"
-yet-reset   = "yet_agavestorm:reset.main"
-yet-scope   = "yet_agavestorm:scope.main"
+yet         = "yet:yet.main"
+yet-archive = "yet:archive.main"
+yet-create  = "yet:create.main"
+yet-drop    = "yet:drop.main"
+yet-git     = "yet:git.main"
+yet-lastid  = "yet:lastid.main"
+yet-list    = "yet:list.main"
+yet-open    = "yet:open.main"
+yet-pick    = "yet:pick.main"
+yet-reset   = "yet:reset.main"
+yet-scope   = "yet:scope.main"
 
