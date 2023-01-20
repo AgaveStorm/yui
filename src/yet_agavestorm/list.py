@@ -16,7 +16,7 @@ def main():
         pass;
 
     location = argv[0]
-    scope = tsklib.loadScope();
+    scope = tsklib.getScope();
 
     def mb_strlen( s ):
         return len(str(s)) #.encode('utf-16-le'))

@@ -2,6 +2,7 @@
 import os, sys, glob, yaml, subprocess, datetime
 from yet_agavestorm import tsklib
 from pathlib import Path
+from sanitize_filename import sanitize
 
 def main():
     argv = sys.argv;
@@ -12,11 +13,12 @@ def main():
         yet create %taskname%   - create new task
     Example:
         yet create do this and do that
-            """)
+        """)
         exit(1);
         pass;
     tasknameArr = argv
     taskname = '_'.join( tasknameArr )
+    taskname = sanitize( taskname )
     taskDatetime = datetime.datetime.today()
     id = str( int( tsklib.getLastId() )+1 )
     path = tsklib.tskpath() + "/heap/new"
@@ -34,7 +36,7 @@ filename:  """+filename+"""
 status: new
 id: """+id+"""
 ---
-    """, encoding='utf-8')
+""", encoding='utf-8')
 
     tsklib.gitAddCommitTask("created "+id);
     pass

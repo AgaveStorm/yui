@@ -8,20 +8,20 @@ def main():
     argv.pop(0); # remove first element, pointing to script itself
     if len(argv) == 0 :
         print("""
-        Usage:
-            yet scope reset
-            yet scope context contextName
-            yet scope project projectName
-            yet scope list
+    Usage:
+        yet scope reset
+        yet scope context contextName
+        yet scope project projectName
+        yet scope list
             """)
         exit(1);
         pass;
 
     command = argv[0]
-    scope = tsklib.loadScope();
+    scope = tsklib.getScope();
     if command == "list":
         for key in scope:
-            print("Name: TSK_"+key.upper()+" = "+scope[key] )
+            print("Name: "+key+" = "+scope[key] )
         exit(0)
         pass
 
