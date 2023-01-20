@@ -136,9 +136,9 @@ def parseFilter( filterstring ):
 
 def getScope():
     scope = loadScope()
-    scope = mergeScope( scope, parseFilter(os.getenv("YET","")) )
+    scope = mergeScope( scope, parseFilter(os.getenv(cmd.upper(),"")) )
     for key in scope:
-        scope[key] = os.getenv("YET_" + key.upper(), scope[key])
+        scope[key] = os.getenv(cmd.upper() + "_" + key.upper(), scope[key])
         pass
     return scope
     pass
