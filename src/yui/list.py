@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess, datetime
-from yet_agavestorm import tsklib
+from yui import tsklib
 from pathlib import Path
 
 def main():
@@ -9,8 +9,8 @@ def main():
     if len(argv) == 0 :
         print("""
         Usage:
-            yet list heap   - list task from heap / global backlog
-            yet list cur    - list task picked for current day
+            """+tsklib.cmd+""" list heap   - list task from heap / global backlog
+            """+tsklib.cmd+""" list cur    - list task picked for current day
             """)
         exit(1);
         pass;

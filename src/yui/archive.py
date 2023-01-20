@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess, datetime
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 def main():
     argv = sys.argv;
@@ -8,11 +8,11 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            yet archive %date%      - move done tasks from .yet/cur to archive with specific date
+            """+tsklib.cmd+""" archive %date%      - move done tasks from .yet/cur to archive with specific date
         Example:
-            yet archive today // bug here, uses UTC date, instead of local date
-            yet archive yesterday
-            yet archive 2023-01-03
+            """+tsklib.cmd+""" archive today // bug here, uses UTC date, instead of local date
+            """+tsklib.cmd+""" archive yesterday
+            """+tsklib.cmd+""" archive 2023-01-03
             """)
         exit(1);
         pass;

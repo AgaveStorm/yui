@@ -3,7 +3,7 @@
 move unfinished tasks back to heap
 """
 import os, sys, glob, yaml, subprocess
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 def main():
     argv = sys.argv;
@@ -11,10 +11,10 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            yet reset %taskId%   - move single task back to heap
-            yet reset all        - move all unfinished tasks back to heap
+            """+tsklib.cmd+""" reset %taskId%   - move single task back to heap
+            """+tsklib.cmd+""" reset all        - move all unfinished tasks back to heap
         Example:
-            yet pick 3
+            """+tsklib.cmd+""" pick 3
             """)
         exit(1);
         pass;

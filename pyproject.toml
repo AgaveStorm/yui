@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "yet"
-version = "0.0.1"
+name = "yui"
+version = "0.0.3"
 authors = [
   { name="Agavestorm Inc", email="somehownottaken@gmail.com" },
 ]
-description = "Yet: git based personal task manager"
+description = "Yui: git based personal task manager"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -18,23 +18,23 @@ classifiers = [
 ]
 dependencies = [
     "appdata>=2",
-    "sanitize_filename">=1.2"
+    "sanitize_filename>=1.2",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/agavestorm/yet"
-"Bug Tracker" = "https://github.com/agavestorm/yet/issues"
+"Homepage" = "https://github.com/agavestorm/yui"
+"Bug Tracker" = "https://github.com/agavestorm/yui/issues"
 
 [project.scripts]
-yet         = "yet:yet.main"
-yet-archive = "yet:archive.main"
-yet-create  = "yet:create.main"
-yet-drop    = "yet:drop.main"
-yet-git     = "yet:git.main"
-yet-lastid  = "yet:lastid.main"
-yet-list    = "yet:list.main"
-yet-open    = "yet:open.main"
-yet-pick    = "yet:pick.main"
-yet-reset   = "yet:reset.main"
-yet-scope   = "yet:scope.main"
+yui         = "yui:main.main"
+yui-archive = "yui:archive.main"
+yui-create  = "yui:create.main"
+yui-drop    = "yui:drop.main"
+yui-git     = "yui:git.main"
+yui-lastid  = "yui:lastid.main"
+yui-list    = "yui:list.main"
+yui-open    = "yui:open.main"
+yui-pick    = "yui:pick.main"
+yui-reset   = "yui:reset.main"
+yui-scope   = "yui:scope.main"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess, datetime
-from yet_agavestorm import tsklib
+from yui import tsklib
 from pathlib import Path
 
 def main():
@@ -9,10 +9,10 @@ def main():
     if len(argv) == 0 :
         print("""
     Usage:
-        yet scope reset
-        yet scope context contextName
-        yet scope project projectName
-        yet scope list
+        """+tsklib.cmd+""" scope reset
+        """+tsklib.cmd+""" scope context contextName
+        """+tsklib.cmd+""" scope project projectName
+        """+tsklib.cmd+""" scope list
             """)
         exit(1);
         pass;

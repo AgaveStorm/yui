@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 
 def main():
@@ -9,9 +9,9 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            yet drop %taskId%   - completely remove single task with specified id
+            """+tsklib.cmd+""" drop %taskId%   - completely remove single task with specified id
         Example:
-            yet drop 3
+            """+tsklib.cmd+""" drop 3
             """)
         exit(1);
         pass;

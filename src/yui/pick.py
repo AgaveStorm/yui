@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 def main():
     argv = sys.argv;
@@ -8,9 +8,9 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            yet pick %taskId%   - pick single task to current day
+            """+tsklib.cmd+""" pick %taskId%   - pick single task to current day
         Example:
-            yet pick 3
+            """+tsklib.cmd+""" pick 3
             """)
         exit(1);
         pass;

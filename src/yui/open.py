@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 def main():
     argv = sys.argv;
@@ -8,9 +8,9 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            yet open %taskId%   - open single task with text editor ( see ~/.tsk/config.yaml )
+            """+tsklib.cmd+""" open %taskId%   - open single task with text editor ( see ~/.tsk/config.yaml )
         Example:
-            yet open 3
+            """+tsklib.cmd+""" open 3
             """)
         exit(1);
         pass;

@@ -2,9 +2,12 @@
 import os, glob, yaml
 from appdata import AppDataPaths
 
+Title="Yui"
+cmd="yui"
+
 def tskpath():
-    default="yet"
-    home = os.getenv("YET_HOME", default)
+    default=cmd
+    home = os.getenv("YUI_HOME", default)
     path = AppDataPaths(home).app_data_path
     os.makedirs(path, exist_ok=True)
     return path

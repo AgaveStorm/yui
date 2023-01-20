@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 def main():
     print( tsklib.getLastId() , end="" )

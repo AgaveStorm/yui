@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys
-from yet_agavestorm import tsklib
+from yui import tsklib
 
 
 def main():

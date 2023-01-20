@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, glob, yaml, subprocess, datetime
-from yet_agavestorm import tsklib
+from yui import tsklib
 from pathlib import Path
 from sanitize_filename import sanitize
 
@@ -10,9 +10,9 @@ def main():
     if len(argv) == 0 :
         print("""
     Usage:
-        yet create %taskname%   - create new task
+        """+tsklib.cmd+""" create %taskname%   - create new task
     Example:
-        yet create do this and do that
+        """+tsklib.cmd+""" create do this and do that
         """)
         exit(1);
         pass;
