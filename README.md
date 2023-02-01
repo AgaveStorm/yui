@@ -3,6 +3,10 @@ Git based personal task manager.
 100% command line.
 (also, Japanese girl name)
 
+> According to TDD as described in "Extreme Programming: Test Driven Development" by Kent Beck,
+we need to start every day with blank sheet of paper, white down small tasks
+and stroke out what is done. This is digital replacement for that paper sheets.
+
 ## Install
 ### Pip 3
 ```
@@ -29,6 +33,10 @@ Workflow:
  5. View archive for specific date `yui list 2023-01-11`
  6. Run manual git command on task list `yui git %git_command% %git_command_args%`
  7. Adjust visible scope with `yui scope`
+ 
+Optional configuration:
+`.yui/config.yaml`
+`.yui/projects/%projectName%.yaml`
  
 ## How it works
  1. There is git repository behind the scenes. So you have history and you can sync tasks using any git server. History, branches, etc.
@@ -123,8 +131,39 @@ Most used:
     - `yui git remote add origin %link%` link your task list with remote repository
     - `yui git push` save local changes to remote repository
     - `yui git pull` load fresh changes from remote repository
-    
-## Todo
-Markdown with yaml header can be easily parsed, so it's a subject for creting extensions for *yui*. 
-Also, tasks can be accessed/synced using git remotes. That's potential for multiple clients (mobile, gui etc).
+   
+## Apllication working folder
+Defaut:
+ - Linux: `~/.yui`
+ - Windows: `c:\Userts\%username%\AppData\yui`
+Can be overwriten with `YUI_HOME` environment variable, like `YUI_HOME=mypath yui list heap`
+
+
+## config.yaml
+> Location: %application-working-folder%/config.yaml
+
+Example:
+```yaml
+---
+# % will be replaced with filename
+# Examples:
+#   To run gui editor: nohup kate % > /dev/null 2>&1 &
+#   To run in terminal: mcedit %
+# You can use nano, vi, mcedit etc
+# If not specified, tsk will try EDITOR environment variable and then mcedit, nano, vim, vi, ee in that order
+editor: nohup kate % > /dev/null 2>&1 &
+---
+```
+
+## Project configuration
+> Location: %application-working-folder%/projects/%projectName%.yaml
+
+Example file:projects/myProject.yaml:
+```yaml
+---
+# this will make YUI_PROJECT=myProject yui create test
+# work the same way as YUI_PROJECT=myProject YUI_CONTEXT=myContext yui create test
+defaultContext: myContext
+---
+```
 

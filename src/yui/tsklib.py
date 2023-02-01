@@ -134,11 +134,21 @@ def parseFilter( filterstring ):
     return scope
     pass
 
+def getDefaultContextForProject( projectName ):
+    try:
+        return loadYaml( tskpath() + "/projects/" + projectName + ".yaml")["defaultContext"]
+    except:
+        return ""
+    pass
+
 def getScope():
     scope = loadScope()
     scope = mergeScope( scope, parseFilter(os.getenv(cmd.upper(),"")) )
     for key in scope:
         scope[key] = os.getenv(cmd.upper() + "_" + key.upper(), scope[key])
+        pass
+    if scope["context"] == "" and scope["project"] != "":
+        scope["context"] = getDefaultContextForProject( scope["project"] )
         pass
     return scope
     pass
