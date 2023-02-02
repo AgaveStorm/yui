@@ -29,8 +29,88 @@ def getTaskFilenameById(id, location="*"):
     return files[0]
     pass
 
+def getTaskFilenameByIdOrNum( idOrNum, location="*"):
+    if idOrNum.isnumeric():
+        return getTaskFilenameById( idOrNum, location )
+        pass
+    if idOrNum[:2] == "id":
+        return getTaskFilenameById( idOrNum[2:], location )
+        pass
+    if idOrNum[:3] == "cur":
+        return getTaskFilenameByNum( idOrNum[3:], "cur")
+        pass
+    if idOrNum[:4] == "heap":
+        return getTaskFilenameByNum( idOrNum[4:], "heap")
+        pass
+    print("Unknown task id or number format");
+    pass
+
+def getTaskByIdOrNum( idOrNum, location="*"):
+    if idOrNum.isnumeric():
+        return getTaskById( idOrNum, location )
+        pass
+    if idOrNum[:2] == "id":
+        return getTaskById( idOrNum[2:], location )
+        pass
+    if idOrNum[:3] == "cur":
+        return getTaskByNum( idOrNum[3:], "cur")
+        pass
+    if idOrNum[:4] == "heap":
+        return getTaskByNum( idOrNum[4:], "heap")
+        pass
+    print("Unknown task id or number format");
+    pass
+
+
+
+def getTaskFilenameByNum( num, location ):
+    return getTaskByNum( num, location )["fullfilename"]
+    pass
+
+def getTaskById(id, location):
+    filename = getTaskFilenameById( id, location )
+    task = loadYaml( filename )
+    task["fullfilename"] = filename
+    return task
+    pass
+
+def getTaskByNum( num, location ):
+    tasks = listTasks( location )
+    for task in tasks:
+        if int(task["No."]) == int(num):
+            return task
+    print("Task "+num+" not found in "+location)
+    pass
+
+
+
 def findTaskFiles(location, pattern):
     return glob.glob( tskpath() + "/"+location+"/*/"+pattern)
+    pass
+
+def listTasks(location):
+    scope = getScope();
+    files = findTaskFiles( location, "*.md" )
+    tasks = []
+    for filename in files:
+        task = loadYaml(filename)
+        task["fullfilename"] = filename
+        addItem = True
+        for key in scope:
+            addItem = addItem and ( scope[key] == "" or scope[key] == task[key] )
+            pass
+        if not addItem:
+            continue
+            pass
+        tasks.append( task )
+        pass
+    tasks = sorted(tasks, key = lambda task : task["id"])
+    key = 0
+    for task in tasks:
+        key = key+1
+        task["No."] = key
+        pass
+    return tasks
     pass
 
 def getConfigParam(param):

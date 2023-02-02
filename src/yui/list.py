@@ -16,7 +16,6 @@ def main():
         pass;
 
     location = argv[0]
-    scope = tsklib.getScope();
 
     def mb_strlen( s ):
         return len(str(s)) #.encode('utf-16-le'))
@@ -33,27 +32,13 @@ def main():
         "done" : green
         }
 
-    files = tsklib.findTaskFiles( location, "*.md" )
-
-    tasks = []
-    for filename in files:
-        task = tsklib.loadYaml(filename)
-        addItem = True
-        for key in scope:
-            addItem = addItem and ( scope[key] == "" or scope[key] == task[key] )
-            pass
-        if not addItem:
-            continue
-            pass
-        tasks.append( task )
-        pass
-    tasks = sorted(tasks, key = lambda task : task["id"])
+    tasks = tsklib.listTasks( location )
 
     if len(tasks) == 0:
-        print("No tasks found"+noColor)
+        print("No tasks found in "+location+noColor)
         exit(1)
         pass
-    keys = ["id", "context", "project", "name", "status"];
+    keys = ["No.", "id", "context", "project", "name", "status"];
 
     maxLenghts = {};
     for key in keys:

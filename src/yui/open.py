@@ -7,15 +7,23 @@ def main():
     argv.pop(0); # remove first element, pointing to script itself
     if len(argv) != 1 :
         print("""
+        open single task with text editor ( see ~/.tsk/config.yaml )
         Usage:
-            """+tsklib.cmd+""" open %taskId%   - open single task with text editor ( see ~/.tsk/config.yaml )
-        Example:
+            """+tsklib.cmd+""" open %taskId%   - by default parameter is interprited as taskId
+            """+tsklib.cmd+""" open id%taskId%   - parameter is task id
+            """+tsklib.cmd+""" open cur%taskNo%   - parameter is task order number as it is shown by `"""+tsklib.cmd+""" list cur` command
+            """+tsklib.cmd+""" open heap%taskNo%   - parameter is task order number as it is shown by `"""+tsklib.cmd+""" list heap` command
+        Examples:
             """+tsklib.cmd+""" open 3
+            """+tsklib.cmd+""" open id3
+            """+tsklib.cmd+""" open cur1
+            """+tsklib.cmd+""" open heap1            
             """)
         exit(1);
         pass;
     id = argv[0]
-    filename = tsklib.getTaskFilenameById(id)
+    filename = tsklib.getTaskFilenameByIdOrNum(id)
+    #print("filename: "+filename)
     try:
         editor = tsklib.getConfigParam("editor")
     except:

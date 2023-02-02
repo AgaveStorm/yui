@@ -11,32 +11,40 @@ def main():
     if len(argv) != 1 :
         print("""
         Usage:
-            """+tsklib.cmd+""" reset %taskId%   - move single task back to heap
+            """+tsklib.cmd+""" reset %taskId%   - move single task back to heap by id
+            """+tsklib.cmd+""" reset id%taskId%   - move single task back to heap by id
+            """+tsklib.cmd+""" reset cur%taskNum%   - move single task back to heap, using order number from """+tsklib.cmd+""" list cur
             """+tsklib.cmd+""" reset all        - move all unfinished tasks back to heap
         Example:
             """+tsklib.cmd+""" pick 3
+            """+tsklib.cmd+""" pick id3
+            """+tsklib.cmd+""" pick cur3
             """)
         exit(1);
         pass;
     id = argv[0]
-    pattern = "*."+id+".md"
+    tasks = []
+
     if id == "all":
-        pattern = "*.md"
-    files = tsklib.findTaskFiles(location="cur", pattern = pattern)
-    if len(files) == 0:
+        tasks = tsklib.listTasks( "cur" );
+        pass
+    else:
+        tasks.append( tsklib.getTaskByIdOrNum( id, "cur") )
+        pass
+    
+    if len(tasks) == 0:
         print("task with id="+id+" not found in cur")
         exit(1)
         pass
 
-    for filename in files:
-        task =  tsklib.loadYaml(filename) 
+    for task in tasks:
         if task["status"] == "done":
             continue
         pass
         targetPath = tsklib.tskpath() + "/heap/"+task["status"]
         os.makedirs(targetPath, exist_ok=True)
         print("moving " + task["filename"] + " back to heap .. ", end="")
-        os.rename( filename, targetPath + "/" + task["filename"]);
+        os.rename( task["fullfilename"], targetPath + "/" + task["filename"]);
         print("done")
     pass
     tsklib.gitAddCommitTask("reset "+id);
