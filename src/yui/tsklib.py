@@ -1,6 +1,10 @@
 #!/usr/bin/env python
-import os, glob, yaml
+import os, glob, yaml, datetime
 from appdata import AppDataPaths
+from sanitize_filename import sanitize
+from pathlib import Path
+
+
 
 Title="Yui"
 cmd="yui"
@@ -235,4 +239,30 @@ def getScope():
 
 def saveScope( scope ):
     saveYaml( tskpath()+"/scope.yaml", scope)
+    pass
+
+def createTask( name ):
+    tasknameArr = name.split(" ")
+    taskname = '_'.join( tasknameArr )
+    taskname = sanitize( taskname )
+    taskDatetime = datetime.datetime.today()
+    id = str( int( getLastId() )+1 )
+    path = tskpath() + "/heap/new"
+    filename = taskDatetime.strftime("%Y-%m-%d_%H.%M.%S_%z_")+taskname+"."+id+".md"
+    os.makedirs(path, exist_ok=True)
+
+    scope = getScope()
+
+    Path( path + "/" + filename ).write_text("""---
+name: """+name+"""
+created: """+taskDatetime.strftime("%Y-%m-%d %H:%M:%S %z")+"""
+context: """+scope["context"]+"""
+project: """+scope["project"]+"""
+filename:  """+filename+"""
+status: new
+id: """+id+"""
+---
+""", encoding='utf-8')
+    
+    gitAddCommitTask("created "+id);
     pass

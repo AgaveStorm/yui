@@ -38,6 +38,7 @@ def main():
     red="\033[1;31m";
     green="\033[1;32m";
     yellow="\033[1;93m";
+    gray="\033[2;37m"
     noColor="\033[0m"; # No Color
 
     colorMap = {
@@ -93,6 +94,13 @@ def main():
         print("│ "+color+(noColor+" │ "+color).join(row.values())+noColor+" │")
         pass
     print( addTitle("╰─"+"─┴─".join(horizontalLines.values())+"─╯", location ))
+    print( gray+"  ", end="" )
+    if location == "heap":
+        print("Hint: use `"+tsklib.cmd+" pick %taskId%` to pick task from Heap to Current tasks ")
+        pass
+    if location == "cur":
+        print("""Hint: use `"""+tsklib.cmd+""" open` to open task in text editor, `"""+tsklib.cmd+""" reset` to move task(s) back to the Heap, `"""+tsklib.cmd+""" archive` to archive done tasks""")
+        pass
 
     print(noColor)
     pass

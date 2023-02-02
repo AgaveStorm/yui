@@ -17,28 +17,7 @@ def main():
         exit(1);
         pass;
     tasknameArr = argv
-    taskname = '_'.join( tasknameArr )
-    taskname = sanitize( taskname )
-    taskDatetime = datetime.datetime.today()
-    id = str( int( tsklib.getLastId() )+1 )
-    path = tsklib.tskpath() + "/heap/new"
-    filename = taskDatetime.strftime("%Y-%m-%d_%H.%M.%S_%z_")+taskname+"."+id+".md"
-    os.makedirs(path, exist_ok=True)
-
-    scope = tsklib.getScope()
-
-    Path( path + "/" + filename ).write_text("""---
-name: """+" ".join(tasknameArr)+"""
-created: """+taskDatetime.strftime("%Y-%m-%d %H:%M:%S %z")+"""
-context: """+scope["context"]+"""
-project: """+scope["project"]+"""
-filename:  """+filename+"""
-status: new
-id: """+id+"""
----
-""", encoding='utf-8')
-
-    tsklib.gitAddCommitTask("created "+id);
+    tsklib.createTask( " ".join(tasknameArr) )
     pass
 
 if __name__=="__main__":

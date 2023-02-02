@@ -1,4 +1,9 @@
 # CHANGELOG
+
+## [2023-02-03]
+### Added
+ - Hint for next possible commands under the list of tasks, different for cur and heap
+
 ## [2023-02-02]
 ### Added
  - Order numbers ( "No." column on the left )
