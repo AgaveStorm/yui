@@ -3,6 +3,20 @@ import os, sys, glob, yaml, subprocess, datetime
 from yui import tsklib
 from pathlib import Path
 
+
+def addTitle( dataString, title ):
+    gap = 2
+    titleString = "[ "+title+" ]"
+    if title == "cur":
+        titleString = "[ Current tasks ]"
+        pass
+    if title == "heap":
+        titleString = "[ Heap/Backlog ]"
+        pass
+    startPos = len(dataString) - gap - len(titleString)
+    return dataString[0:startPos] + titleString + dataString[startPos+len(titleString):len(dataString)]
+    pass
+
 def main():
     argv = sys.argv;
     argv.pop(0); # remove first element, pointing to script itself
@@ -78,7 +92,7 @@ def main():
             pass
         print("│ "+color+(noColor+" │ "+color).join(row.values())+noColor+" │")
         pass
-    print("╰─"+"─┴─".join(horizontalLines.values())+"─╯")
+    print( addTitle("╰─"+"─┴─".join(horizontalLines.values())+"─╯", location ))
 
     print(noColor)
     pass
