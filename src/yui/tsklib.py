@@ -266,3 +266,53 @@ id: """+id+"""
     
     gitAddCommitTask("created "+id);
     pass
+
+def pickTask(id):
+    filename = getTaskFilenameByIdOrNum(id, "heap")
+    task = loadYaml(filename)
+    targetPath = tskpath() + "/cur/" + task["status"]
+    os.makedirs(targetPath, exist_ok=True)
+    os.rename( filename, targetPath + "/" + task["filename"]);
+    gitAddCommitTask("pick "+id);
+    pass
+
+def rangeQueryToArray(query):
+    tasks = listTasks("heap")
+    taskIds = []
+    if ".." in query:
+        for task in tasks:
+            taskIds.append( task["id"] )
+            pass
+        pass
+    #print(taskIds)
+    ids = []
+    queryElements = query.split(",")
+    for queryElement in queryElements:
+        taskRange = queryElement.split("..")
+        if len(taskRange) == 1:
+            ids.append( queryElement )
+            continue
+        pass
+        if len(taskRange) > 2:
+            raise Exception("Mailformed id range query")
+        pass
+        for item in range(int(taskRange[0]), int(taskRange[1])+1): # TODO generalize for curNNN, heapNNN
+            if item in taskIds:
+                ids.append(str(item))
+                pass
+            pass
+        pass
+    return ids
+    pass
+
+def pickTasks(query):
+    '''
+    pick one or more tasks using array and range, like pick 141,142,143..150
+    pick only from results of listTasks(heap)
+    '''
+    items = rangeQueryToArray(query)
+    for item in items:
+        #print(item)
+        pickTask(item)
+        pass
+    pass
