@@ -38,7 +38,7 @@ def main():
         pass
 
     for task in tasks:
-        if task["status"] == "done":
+        if task["status"] in ["done","fail"] :
             continue
         pass
         targetPath = tsklib.tskpath() + "/heap/"+task["status"]

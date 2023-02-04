@@ -242,9 +242,10 @@ def saveScope( scope ):
     pass
 
 def createTask( name ):
+    name = name.replace("\"","'")
     tasknameArr = name.split(" ")
     taskname = '_'.join( tasknameArr )
-    taskname = sanitize( taskname )
+    taskname = sanitize( taskname ).replace("'","").replace("\"","").replace("`","")
     taskDatetime = datetime.datetime.today()
     id = str( int( getLastId() )+1 )
     path = tskpath() + "/heap/new"
@@ -254,7 +255,7 @@ def createTask( name ):
     scope = getScope()
 
     Path( path + "/" + filename ).write_text("""---
-name: """+name+"""
+name: \""""+name+"""\"
 created: """+taskDatetime.strftime("%Y-%m-%d %H:%M:%S %z")+"""
 context: """+scope["context"]+"""
 project: """+scope["project"]+"""

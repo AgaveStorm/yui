@@ -69,7 +69,8 @@ def main():
     colorMap = {
         "new" : red,
         "work" : yellow,
-        "done" : green
+        "done" : green,
+        "fail" : green,
         }
 
     tasks = tsklib.listTasks( location )

@@ -32,7 +32,7 @@ def main():
 
     for filename in files:
         task =  tsklib.loadYaml(filename) 
-        if task["status"] != "done":
+        if task["status"] not in ["done","fail"]:
             continue
         pass
         targetPath = tsklib.tskpath() + "/"+date+"/"+task["status"]
