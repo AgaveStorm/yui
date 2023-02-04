@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, glob, yaml, datetime
+import os, glob, yaml, datetime, subprocess
 from appdata import AppDataPaths
 from sanitize_filename import sanitize
 from pathlib import Path
@@ -133,6 +133,14 @@ def saveYaml(filename, data):
         pass
     pass
 
+def gitExist()->bool:
+    try:
+        re = subprocess.run(["git","-v"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except:
+        return False
+    return re.returncode == 0
+    pass
+
 def gitInitIfNotPresent():
     workingdir = tskpath()
     if os.path.isdir( workingdir+"/.git"):
@@ -145,6 +153,10 @@ def gitInitIfNotPresent():
     pass
 
 def gitAddCommitTask(message):
+    if not gitExist():
+        print("git not exist");
+        return
+        pass
     gitInitIfNotPresent()
     curpath = os.getcwd();
     os.chdir(tskpath());

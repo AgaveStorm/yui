@@ -1,7 +1,13 @@
 # CHANGELOG
 
+## [2023-02-05]
+### Added
+ - check if git exist, disable automatic commits if not, display warning
+
 ## [2023-02-04]
+### Added
  - pick range of items like so: `pick 141,142,143..154`
+
 ## [2023-02-03]
 ### Added
  - Hint for next possible commands under the list of tasks, different for cur and heap
