@@ -167,3 +167,5 @@ defaultContext: myContext
 ---
 ```
 
+## Advanced options
+You can pick range of items like so `pick 141,142,143..154`
