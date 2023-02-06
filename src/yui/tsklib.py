@@ -4,10 +4,12 @@ from appdata import AppDataPaths
 from sanitize_filename import sanitize
 from pathlib import Path
 
-
-
 Title="Yui"
 cmd="yui"
+scopeNames = {
+    "context":[],
+    "project":[],
+    }
 
 def tskpath():
     default=cmd
@@ -71,8 +73,8 @@ def getTaskFilenameByNum( num, location ):
     return getTaskByNum( num, location )["fullfilename"]
     pass
 
-def getTaskById(id, location):
-    filename = getTaskFilenameById( id, location )
+def getTaskById(id, location="*"):
+    filename = getTaskFilenameById( str(id), location )
     task = loadYaml( filename )
     task["fullfilename"] = filename
     return task
@@ -92,7 +94,7 @@ def findTaskFiles(location, pattern):
     return glob.glob( tskpath() + "/"+location+"/*/"+pattern)
     pass
 
-def listTasks(location):
+def listTasks(location, useScope=True):
     scope = getScope();
     files = findTaskFiles( location, "*.md" )
     tasks = []
@@ -103,7 +105,7 @@ def listTasks(location):
         for key in scope:
             addItem = addItem and ( scope[key] == "" or scope[key] == task[key] )
             pass
-        if not addItem:
+        if useScope and not addItem:
             continue
             pass
         tasks.append( task )
@@ -329,3 +331,35 @@ def pickTasks(query):
         pickTask(item)
         pass
     pass
+
+def resetTask(idOrNum):
+    task = getTaskByIdOrNum(idOrNum)
+    if task["status"] in ["done","fail"]:
+        return
+        pass
+    targetPath = tskpath() + "/heap/"+task["status"]
+    os.makedirs(targetPath, exist_ok=True)
+    os.rename( task["fullfilename"], targetPath + "/" + task["filename"]);
+    pass
+
+def loadScopeNames():
+    tasks = listTasks("heap", useScope=False) + listTasks("cur", useScope=False)
+    #print( tasks )
+    for task in tasks:
+        for key in ["context","project"]:
+            if task[key] not in scopeNames[key]:
+                if task[key] == None:
+                    continue
+                pass
+                scopeNames[key].append( task[key] )
+            pass
+        pass
+    print( scopeNames )
+    pass
+
+def getScopeNames( key ):
+    if len( scopeNames[key]) == 0:
+        loadScopeNames()
+    return scopeNames[key]
+    pass
+
