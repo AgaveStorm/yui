@@ -3,6 +3,8 @@ import os, glob, yaml, datetime, subprocess
 from appdata import AppDataPaths
 from sanitize_filename import sanitize
 from pathlib import Path
+from unidecode import unidecode
+import platform
 
 Title="Yui"
 cmd="yui"
@@ -14,6 +16,9 @@ scopeNames = {
 def tskpath():
     default=cmd
     home = os.getenv("YUI_HOME", default)
+    if platform.system() == "Windows":
+        home = os.getenv('LOCALAPPDATA')+"/"+home 
+        pass
     path = AppDataPaths(home).app_data_path
     os.makedirs(path, exist_ok=True)
     return path
@@ -80,6 +85,14 @@ def getTaskById(id, location="*"):
     return task
     pass
 
+def getTasksByIds( ids ):
+    re = []
+    for id in ids:
+        re.append( getTaskById(id) )
+        pass
+    return re
+    pass    
+
 def getTaskByNum( num, location ):
     tasks = listTasks( location )
     for task in tasks:
@@ -124,7 +137,7 @@ def getConfigParam(param):
     pass
 
 def loadYaml(filename):
-    with open( filename ) as f:
+    with open( filename, 'rb' ) as f:
         return next(yaml.load_all(f, Loader=yaml.loader.UnsafeLoader))
         pass
     pass
@@ -256,9 +269,13 @@ def saveScope( scope ):
     pass
 
 def createTask( name ):
+    name = name.strip()
+    if name == "":
+        return
     name = name.replace("\"","'")
     tasknameArr = name.split(" ")
     taskname = '_'.join( tasknameArr )
+    taskname = unidecode( taskname )
     taskname = sanitize( taskname ).replace("'","").replace("\"","").replace("`","")
     taskDatetime = datetime.datetime.today()
     id = str( int( getLastId() )+1 )
@@ -325,10 +342,12 @@ def pickTasks(query):
     pick one or more tasks using array and range, like pick 141,142,143..150
     pick only from results of listTasks(heap)
     '''
-    items = rangeQueryToArray(query)
-    for item in items:
-        #print(item)
-        pickTask(item)
+    pickTasksByIds( rangeQueryToArray(query) )
+    pass
+
+def pickTasksByIds( ids ):
+    for id in ids:
+        pickTask( str(id) )
         pass
     pass
 
@@ -340,6 +359,23 @@ def resetTask(idOrNum):
     targetPath = tskpath() + "/heap/"+task["status"]
     os.makedirs(targetPath, exist_ok=True)
     os.rename( task["fullfilename"], targetPath + "/" + task["filename"]);
+    pass
+
+def resetTasksByIds( ids ):
+    for id in ids:
+        resetTask( str(id) )
+        pass
+    pass
+
+def dropTask( id ):
+    file = getTaskFilenameByIdOrNum(id)
+    os.remove(file)
+    pass
+
+def dropTasksByIds(ids):
+    for id in ids:
+        dropTask( str(id) )
+        pass
     pass
 
 def loadScopeNames():

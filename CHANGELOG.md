@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [2023-02-12]
+### Fixed
+ - Default folder on windows was %userfolder%/yui, should be %userfolder%/AppData/Local, fixed. 
+
 ## [2023-02-05]
 ### Added
  - check if git exist, disable automatic commits if not, display warning
