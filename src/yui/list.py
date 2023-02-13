@@ -3,14 +3,6 @@ import os, sys, glob, yaml, subprocess, datetime
 from yui import tsklib
 from pathlib import Path
 
-red="\033[1;31m";
-green="\033[1;32m";
-yellow="\033[1;93m";
-gray="\033[2;37m"
-bgRed="\033[1;41m"
-bgGreen="\033[1;42m"
-bgYellow="\033[1;43m"
-noColor="\033[0m"; # No Color
 
 
 def addTitle( dataString, title ):
@@ -26,24 +18,11 @@ def addTitle( dataString, title ):
     return dataString[0:startPos] + titleString + dataString[startPos+len(titleString):len(dataString)]
     pass
 
-def termColor( basecolor, isBg=False):
-    if not isBg:
-        return basecolor
-        pass
-    bgMap = {
-        red : bgRed,
-        green : bgGreen,
-        yellow : bgYellow
-        }
-    try:
-        return bgMap[basecolor]
-    except:
-        return basecolor
-    pass
 
 def main():
     argv = sys.argv;
     argv.pop(0); # remove first element, pointing to script itself
+    noColor = tsklib.color("noColor")
     if len(argv) == 0 :
         print("""
         Usage:
@@ -58,20 +37,6 @@ def main():
     def mb_strlen( s ):
         return len(str(s)) #.encode('utf-16-le'))
         pass
-
-    red="\033[1;31m";
-    green="\033[1;32m";
-    yellow="\033[1;93m";
-    gray="\033[2;37m"
-    bgGray="\033[0;100m"
-    noColor="\033[0m"; # No Color
-
-    colorMap = {
-        "new" : red,
-        "work" : yellow,
-        "done" : green,
-        "fail" : green,
-        }
 
     tasks = tsklib.listTasks( location )
 
@@ -112,18 +77,11 @@ def main():
     print("├─"+"─┼─".join(horizontalLines.values())+"─┤");
     for i, task in enumerate(tasks):
         row = rows[i]
-        color = ""
-        #print( row["status"] , colorMap )
-        if task["status"] in colorMap.keys():
-            color = colorMap[ task["status"] ];
-            pass
-        #if i % 2 == 1:
-            #color = termColor(color, True)
-            #pass
+        color = tsklib.statusColor( task["status"] )
         print("│ "+color+(noColor+" │ "+color).join(row.values())+noColor+" │")
         pass
     print( addTitle("╰─"+"─┴─".join(horizontalLines.values())+"─╯", location ))
-    print( gray+"  ", end="" )
+    print( tsklib.color("gray")+"  ", end="" )
     if location == "heap":
         print("Hint: use `"+tsklib.cmd+" pick %taskId%` to pick task from the Heap to Current tasks ")
         pass
@@ -131,7 +89,7 @@ def main():
         print("""Hint: use `"""+tsklib.cmd+""" open` to open task in text editor, `"""+tsklib.cmd+""" reset` to move task(s) back to the Heap, `"""+tsklib.cmd+""" archive` to archive done tasks""")
         pass
 
-    print(noColor)
+    print(tsklib.color("noColor"))
     pass
 
 if __name__ == "__main__":

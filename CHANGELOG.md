@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [2023-02-13]
+### Fixed
+ - Yaml dependency problem, etc
+ - No linux colors in windows console (will be just white)
+
 ## [2023-02-12]
 ### Fixed
  - Default folder on windows was %userfolder%/yui, should be %userfolder%/AppData/Local, fixed. 

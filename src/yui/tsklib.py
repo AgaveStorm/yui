@@ -13,6 +13,34 @@ scopeNames = {
     "project":[],
     }
 
+
+def color( key ):
+    linuxColors = {
+        "red":"\033[1;31m",
+        "green":"\033[1;32m",
+        "yellow":"\033[1;93m",
+        "gray":"\033[2;37m",
+        "noColor":"\033[0m", # No Color
+        }
+    if key not in linuxColors.keys():
+        return ""
+    if platform.system() == "Windows":
+        return ""
+    return linuxColors[key]
+    pass
+
+def statusColor( status ):
+    colorMap = {
+        "new" : "red",
+        "work" : "yellow",
+        "done" : "green",
+        "fail" : "green",
+        }
+    if status not in colorMap.keys():
+        return ""
+    return color( colorMap[ status ] )
+    pass
+
 def tskpath():
     default=cmd
     home = os.getenv("YUI_HOME", default)

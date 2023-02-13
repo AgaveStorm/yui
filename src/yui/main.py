@@ -4,7 +4,7 @@ from yui import tsklib
 
 def main():
     if not tsklib.gitExist():
-        print("\033[1;93m[warning] git not found, install git to enable task history\033[0m");
+        print(tsklib.color("yellow")+"[warning] git not found, install git to enable task history"+tsklib.color("noColor"));
         pass
     argv = sys.argv;
     argv.pop(0); # remove first element, pointing to script itself
