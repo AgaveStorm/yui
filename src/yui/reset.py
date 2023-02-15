@@ -26,28 +26,12 @@ def main():
     tasks = []
 
     if id == "all":
-        tasks = tsklib.listTasks( "cur" );
-        pass
-    else:
-        tasks.append( tsklib.getTaskByIdOrNum( id, "cur") )
+        tsklib.resetAll()
+        return
         pass
     
-    if len(tasks) == 0:
-        print("task with id="+id+" not found in cur")
-        exit(1)
-        pass
-
-    for task in tasks:
-        if task["status"] in ["done","fail"] :
-            continue
-        pass
-        targetPath = tsklib.tskpath() + "/heap/"+task["status"]
-        os.makedirs(targetPath, exist_ok=True)
-        print("moving " + task["filename"] + " back to heap .. ", end="")
-        os.rename( task["fullfilename"], targetPath + "/" + task["filename"]);
-        print("done")
-    pass
-    tsklib.gitAddCommitTask("reset "+id);
+    tsklib.resetTask( id )
+    
     pass
 
 if __name__=="__main__":

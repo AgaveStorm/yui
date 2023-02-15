@@ -395,6 +395,17 @@ def resetTasksByIds( ids ):
         pass
     pass
 
+def resetAll():
+    tasks = listTasks( "cur", False );
+    for task in tasks:
+        if task["status"] in ["done","fail"] :
+            continue
+        pass
+        resetTask( str(task["id"]) )
+    pass
+    gitAddCommitTask("reset all");
+    pass
+
 def dropTask( id ):
     file = getTaskFilenameByIdOrNum(id)
     os.remove(file)
@@ -427,3 +438,27 @@ def getScopeNames( key ):
     return scopeNames[key]
     pass
 
+def archive( date ):
+    tasks = listTasks("cur", useScope=False)
+    if len(tasks) == 0:
+        raise ETasksNotFound()
+        pass
+
+    for task in tasks:
+        if task["status"] not in ["done","fail"]:
+            continue
+            pass
+        targetPath = tskpath() + "/"+date+"/"+task["status"]
+        os.makedirs(targetPath, exist_ok=True)
+        print("moving " + task["filename"] + " to "+date+" .. ", end="")
+        os.rename( task["fullfilename"], targetPath + "/" + task["filename"]);
+        print("done")
+        pass
+    gitAddCommitTask("archive "+date);
+    pass
+
+def listArchives():
+    archives = [os.path.basename(x) for x in glob.glob( tskpath() + "/*-*-*")]
+    archives.sort()
+    return archives
+    pass

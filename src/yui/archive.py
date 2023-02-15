@@ -23,25 +23,25 @@ def main():
     if( date == "yesterday" ):
         date = (datetime.date.today() - datetime.timedelta(days = 1)).strftime("%Y-%m-%d")
         pass
+    tsklib.archive( date )
+    #files = tsklib.findTaskFiles("cur", "*.md")
+    #if len(files) == 0:
+        #print("No tasks found")
+        #exit(1)
+        #pass
 
-    files = tsklib.findTaskFiles("cur", "*.md")
-    if len(files) == 0:
-        print("No tasks found")
-        exit(1)
-        pass
-
-    for filename in files:
-        task =  tsklib.loadYaml(filename) 
-        if task["status"] not in ["done","fail"]:
-            continue
-        pass
-        targetPath = tsklib.tskpath() + "/"+date+"/"+task["status"]
-        os.makedirs(targetPath, exist_ok=True)
-        print("moving " + task["filename"] + " to "+date+" .. ", end="")
-        os.rename( filename, targetPath + "/" + task["filename"]);
-        print("done")
-    pass
-    tsklib.gitAddCommitTask("reset "+str(id));
+    #for filename in files:
+        #task =  tsklib.loadYaml(filename) 
+        #if task["status"] not in ["done","fail"]:
+            #continue
+        #pass
+        #targetPath = tsklib.tskpath() + "/"+date+"/"+task["status"]
+        #os.makedirs(targetPath, exist_ok=True)
+        #print("moving " + task["filename"] + " to "+date+" .. ", end="")
+        #os.rename( filename, targetPath + "/" + task["filename"]);
+        #print("done")
+    #pass
+    #tsklib.gitAddCommitTask("reset "+str(id));
     pass
 
 if __name__=="__main__":

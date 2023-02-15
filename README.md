@@ -167,5 +167,16 @@ defaultContext: myContext
 ---
 ```
 
+## View archives
+```
+yui list-archives
+```
+Will display list of existing archives, from application working folder
+
+To view tasks in single archive use
+```
+yui list %archiveName%
+```
+
 ## Advanced options
 You can pick range of items like so `pick 141,142,143..154`

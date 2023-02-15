@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [2023-02-15]
+### Added
+ - list-archives command
+
 ## [2023-02-13]
 ### Fixed
  - Yaml dependency problem, etc
