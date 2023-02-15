@@ -23,7 +23,7 @@ def main():
         """+tsklib.cmd+""" scope               - change/reset scope ( current context and project ) affects avironment variables """+tsklib.cmd+"""_CONTEXT, """+tsklib.cmd+"""_PROJECT
         """+tsklib.cmd+""" drop                - Use with care! completely remove task with specific id
         """+tsklib.cmd+""" git %attributes%    - run git on ./"""+tsklib.cmd+""" folder
-        """+tsklib.cmd+""" list-archives       - list existing archives
+        """+tsklib.cmd+""" list_archives       - list existing archives
         
     Environmant variables:
         """+tsklib.cmd.upper()+"""_CONTEXT             - set context

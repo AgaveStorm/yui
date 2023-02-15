@@ -169,7 +169,7 @@ defaultContext: myContext
 
 ## View archives
 ```
-yui list-archives
+yui list_archives
 ```
 Will display list of existing archives, from application working folder
 
