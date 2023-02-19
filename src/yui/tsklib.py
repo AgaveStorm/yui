@@ -417,16 +417,19 @@ def dropTasksByIds(ids):
         pass
     pass
 
+def addScopeName(key,value):
+    if value in scopeNames[key] or value == None or value == "":
+        return
+        pass
+    scopeNames[key].append( value )    
+    pass
+
 def loadScopeNames():
     tasks = listTasks("heap", useScope=False) + listTasks("cur", useScope=False)
     #print( tasks )
     for task in tasks:
         for key in ["context","project"]:
-            if task[key] not in scopeNames[key]:
-                if task[key] == None:
-                    continue
-                pass
-                scopeNames[key].append( task[key] )
+            addScopeName(key, task[key])
             pass
         pass
     print( scopeNames )
