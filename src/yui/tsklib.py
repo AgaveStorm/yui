@@ -6,6 +6,9 @@ from pathlib import Path
 from unidecode import unidecode
 import platform
 
+class EYamlNotLoaded(Exception):
+    pass
+
 Title="Yui"
 cmd="yui"
 scopeNames = {
@@ -165,8 +168,13 @@ def getConfigParam(param):
     pass
 
 def loadYaml(filename):
-    with open( filename, 'rb' ) as f:
-        return next(yaml.load_all(f, Loader=yaml.loader.UnsafeLoader))
+    try:
+        with open( filename, 'rb' ) as f:
+            return next(yaml.load_all(f, Loader=yaml.loader.UnsafeLoader))
+            pass
+        raise EYamlNotLoaded("Can't load file "+str(filename) )
+    except:
+        raise EYamlNotLoaded("Can't load file "+str(filename) )
         pass
     pass
 
@@ -304,7 +312,7 @@ def createTask( name ):
     tasknameArr = name.split(" ")
     taskname = '_'.join( tasknameArr )
     taskname = unidecode( taskname )
-    taskname = sanitize( taskname ).replace("'","").replace("\"","").replace("`","")
+    taskname = sanitize( taskname ).replace("'","").replace("\"","").replace("`","").replace("%","")
     taskDatetime = datetime.datetime.today()
     id = str( int( getLastId() )+1 )
     path = tskpath() + "/heap/new"

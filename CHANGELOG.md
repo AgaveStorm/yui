@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [2023-02-20]
+ - Macos and windows changes for yui open
+ - error handling for random string instead of taskId
+
 ## [2023-02-15]
 ### Added
  - list-archives command

@@ -24,6 +24,9 @@ def main():
         pass;
     id = argv[0]
     file = tsklib.getTaskFilenameByIdOrNum(id)
+    if file is None or file=="":
+        print("File not found")
+        exit(1)
     print("Deleting task "+file+" .. ", end="")
     os.remove(file)
     print("done")

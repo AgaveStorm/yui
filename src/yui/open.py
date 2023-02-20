@@ -22,12 +22,25 @@ def main():
         exit(1);
         pass;
     id = argv[0]
+    
     filename = tsklib.getTaskFilenameByIdOrNum(id)
+    if filename is None or filename == "":
+        print("File not found")
+        exit(1)
+        pass
     #print("filename: "+filename)
+    editor = ""
     try:
         editor = tsklib.getConfigParam("editor")
     except:
-        candidates = [ os.getenv("EDITOR"), "mcedit","nano", "vim", "vi","ee"]
+        envEditor = os.getenv("EDITOR") # can be None or empty
+        candidates = ["mcedit","nano", "vim", "vi","ee"
+                      , "open -t" # this is to open with macos default text editor
+                      , "notepad" # windows
+                      ]
+        if envEditor is not None and envEditor != "":
+            candidates.insert(0,str(envEditor))
+            pass
         for candidate in candidates:
             if subprocess.call("which " + candidate + "> /dev/null", shell=True) == 0:
                 editor = candidate+" %"
@@ -38,7 +51,8 @@ def main():
         exit(1);
         pass
 
-    cmd = editor.replace("%", filename)
+    
+    cmd = editor.replace("%", str(filename) )
     subprocess.call( cmd, shell=True );
     pass
 

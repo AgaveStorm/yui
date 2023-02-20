@@ -21,7 +21,10 @@ def main():
             """)
         exit(1);
         pass;
-    tsklib.pickTasks( argv[0] )
+    try:
+        tsklib.pickTasks( argv[0] )
+    except Exception as e:
+        print( e )
     pass
 
 if __name__=="__main__":
