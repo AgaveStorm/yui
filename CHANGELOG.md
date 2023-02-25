@@ -1,8 +1,10 @@
 # CHANGELOG
 
 ## [2023-02-20]
+### Added
  - Macos and windows changes for yui open
  - error handling for random string instead of taskId
+ - Open with notepad on windows, if editor not specified
 
 ## [2023-02-15]
 ### Added

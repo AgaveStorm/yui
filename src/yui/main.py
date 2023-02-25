@@ -45,6 +45,8 @@ def main():
             """+tsklib.cmd.upper()+"""_CONTEXT, """+tsklib.cmd.upper()+"""_PROJECT - high
             """+tsklib.cmd.upper()+"""                      - middle
             scope.yaml               - low
+        
+    Quick start tutorial:   https://yuistaskmanager.github.io/howto/cli/quick-start/
             """);
         exit(1);
         pass

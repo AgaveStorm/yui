@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, sys, glob, yaml, subprocess
+import os, sys, glob, yaml, subprocess, platform
 from yui import tsklib
 
 def main():
@@ -36,16 +36,21 @@ def main():
         envEditor = os.getenv("EDITOR") # can be None or empty
         candidates = ["mcedit","nano", "vim", "vi","ee"
                       , "open -t" # this is to open with macos default text editor
-                      , "notepad" # windows
                       ]
         if envEditor is not None and envEditor != "":
             candidates.insert(0,str(envEditor))
             pass
         for candidate in candidates:
-            if subprocess.call("which " + candidate + "> /dev/null", shell=True) == 0:
-                editor = candidate+" %"
-                break
+            if platform.system() != "Windows":
+                if subprocess.call("which " + candidate + "> /dev/null", shell=True) == 0:
+                    editor = candidate+" %"
+                    break
+                pass
+            if platform.system() == "Windows":
+                editor = "notepad %"
+                pass
             pass
+        pass
     if editor=="":
         print("Can't detect text editor, use "+tsklib.tskpath()+"/config.yaml to specify");
         exit(1);
