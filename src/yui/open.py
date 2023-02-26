@@ -17,7 +17,9 @@ def main():
             """+tsklib.cmd+""" open 3
             """+tsklib.cmd+""" open id3
             """+tsklib.cmd+""" open cur1
-            """+tsklib.cmd+""" open heap1            
+            """+tsklib.cmd+""" open heap1
+            
+        How to setup editor: https://yuistaskmanager.github.io/howto/cli/configure-editor/
             """)
         exit(1);
         pass;

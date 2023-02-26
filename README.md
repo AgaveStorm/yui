@@ -135,7 +135,7 @@ Most used:
 ## Apllication working folder
 Defaut:
  - Linux: `~/.yui`
- - Windows: `c:\Userts\%username%\AppData\yui`
+ - Windows: `c:\Users\%username%\AppData\Local\yui`
 Can be overwriten with `YUI_HOME` environment variable, like `YUI_HOME=mypath yui list heap`
 
 
